@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "title": "AutoFlow CRM",
+    "startDate": "2024",
+    "endDate": "2024",
+    "description": "Pipeline de automatización...",
+    "category": "Automatización",
+    "github": "https://github.com/tu-usuario/autoflow-crm",
+    "demo": null,
+    "image": null,
+    "featured": true,
+    "techs": ["n8n", "nodejs", "postgresql", "docker"]
+  },
+  {
+    "id": 2,
+    "title": "Invoice Processor",
+    "startDate": "2023",
+    "endDate": "2024",
+    "description": "Extracción automática...",
+    "category": "Automatización",
+    "github": "https://github.com/tu-usuario/invoice-processor",
+    "demo": null,
+    "image": "/projects/invoice.png",
+    "featured": false,
+    "techs": ["python", "fastapi", "postgresql", "docker"]
+  }
+]

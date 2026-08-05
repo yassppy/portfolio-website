@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+/* Sintaxis correcta para Tailwind v4 con comillas */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #fcfcfc;
+  --foreground: #121212;
+  --card-bg: #f4f4f5;
+  --card-border: #e4e4e7;
+}
+
+.dark {
+  --background: #121212;
+  --foreground: #f4f4f5;
+  --card-bg: #1a1a1e;
+  --card-border: #27272a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card-bg);
+  --color-card-border: var(--card-border);
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+  --font-serif: "Playfair Display", Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom scrollbar ultra discreto */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+/* Glassmorphism minimalista para tarjetas Bento */
+.bento-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 1rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.bento-card:hover {
+  border-color: #3f3f46;
+}
+
+/* Typing cursor animation */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* Tech icon subtle hover scaling */
+.tech-icon {
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.tech-icon:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.2);
+}
