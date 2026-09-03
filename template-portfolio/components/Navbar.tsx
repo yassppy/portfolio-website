@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
+import profileData from "@/data/profile.json";
+
 
 const navLinks = [
   { label: "Inicio", href: "#hero" },
@@ -24,20 +26,30 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+    let ticking = false;
 
-      // Active section detection
-      const sections = navLinks.map((l) => l.href.replace("#", ""));
-      for (const section of sections.reverse()) {
-        const el = document.getElementById(section);
-        if (el && window.scrollY >= el.offsetTop - 100) {
-          setActiveSection(section);
-          break;
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        setScrolled(y > 20);
+
+        // Detección de sección activa
+        const sections = navLinks.map((l) => l.href.replace("#", ""));
+        for (const section of sections.reverse()) {
+          const el = document.getElementById(section);
+          if (el && y >= el.offsetTop - 100) {
+            setActiveSection(section);
+            break;
+          }
         }
-      }
+        ticking = false;
+      });
     };
-    window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -67,7 +79,7 @@ export default function Navbar() {
               onClick={() => scrollTo("#hero")}
               whileHover={{ scale: 1.05 }}
             >
-              &lt;yassppy /&gt;
+              &lt;{profileData.username} /&gt;
             </motion.span>
 
             {/* Desktop Links */}
