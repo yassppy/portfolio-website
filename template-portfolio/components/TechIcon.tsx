@@ -1,6 +1,4 @@
-"use client";
-
-import React from "react";
+import React, { memo } from "react";
 
 // 1. Definimos la interfaz del objeto real que exporta 'thesvg'
 interface SvgIconData {
@@ -48,6 +46,8 @@ import vite from "thesvg/vite";
 import git from "thesvg/git";
 import cloudflare from "thesvg/cloudflare";
 import railway from "thesvg/railway";
+import databricks from "thesvg/databricks";
+import go from "thesvg/go";
 
 // Mapa de los objetos de los iconos
 const ICON_MAP: Record<string, SvgIconData> = {
@@ -85,6 +85,8 @@ const ICON_MAP: Record<string, SvgIconData> = {
   git,
   cloudflare,
   railway,
+  databricks,
+  go,
 };
 
 // Human-readable labels
@@ -111,7 +113,7 @@ type Props = {
   useMono?: boolean; // Opción para usar la variante mono si existe
 };
 
-export default function TechIcon({
+export default memo(function TechIcon({
   tech,
   size = 16,
   showLabel = false,
@@ -159,4 +161,4 @@ export default function TechIcon({
       </span>
     </span>
   );
-}
+});

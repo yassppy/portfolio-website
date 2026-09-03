@@ -71,7 +71,8 @@ const timeline: TimelineItem[] = [
     company: "n8n / Udemy",
     period: "2023",
     location: "Online",
-    description: "Certificación avanzada en automatización de flujos de trabajo con n8n.",
+    description:
+      "Certificación avanzada en automatización de flujos de trabajo con n8n.",
     achievements: [
       "Completé 40+ horas de entrenamiento práctico",
       "Implementé proyectos reales durante la certificación",
@@ -104,7 +105,8 @@ const icons = {
 const colors = {
   work: "bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 border-indigo-200 dark:border-indigo-800",
   edu: "bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800",
-  award: "bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800",
+  award:
+    "bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800",
 };
 
 export default function ExperienceSection() {
@@ -122,13 +124,14 @@ export default function ExperienceSection() {
           className="mb-12"
         >
           <p className="text-indigo-500 dark:text-indigo-400 text-sm font-mono mb-2">
-            // experiencia
+            {/* experiencia */}
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-zinc-100 mb-4">
             Experiencia & Formación
           </h2>
           <p className="text-zinc-500 dark:text-zinc-400 max-w-xl">
-            Trayectoria profesional con resultados medibles y aprendizaje continuo.
+            Trayectoria profesional con resultados medibles y aprendizaje
+            continuo.
           </p>
         </motion.div>
 
@@ -235,7 +238,9 @@ export default function ExperienceSection() {
                                   transition={{ delay: j * 0.08 }}
                                   className="flex items-start gap-2 text-sm text-zinc-500 dark:text-zinc-400"
                                 >
-                                  <span className="text-indigo-500 mt-0.5 shrink-0">→</span>
+                                  <span className="text-indigo-500 mt-0.5 shrink-0">
+                                    →
+                                  </span>
                                   {ach}
                                 </motion.li>
                               ))}

@@ -85,3 +85,12 @@ body {
   transform: translateY(-2px);
   filter: brightness(1.2);
 }
+
+/* Hide scrollbar visually but keep scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

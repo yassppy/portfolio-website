@@ -1,0 +1,45 @@
+{
+  "name": "Miguel Mallqui",
+  "initials": "MM",
+  "username": "yassppy",
+  "roles": [
+    "Automatización de Procesos",
+    "Ingeniería de Datos"
+  ],
+  "bio": "Especialista en Automatización de Procesos y Datos. Integro IA y arquitecturas escalables no para reemplazar al equipo, sino para liberarlo de tareas manuales y potenciar su rendimiento.",
+  "location": {
+    "city": "Lima",
+    "country": "Perú",
+    "label": "LIMA, PE"
+  },
+  "weather": {
+    "temp": "24°C"
+  },
+  "available": true,
+  "availableText": "Actualmente acepto proyectos de automatización, ETL y consultoría.",
+  "social": [
+    {
+      "platform": "github",
+      "label": "GitHub",
+      "url": "https://github.com/yassppy",
+      "username": "@yassppy"
+    },
+    {
+      "platform": "linkedin",
+      "label": "LinkedIn",
+      "url": "https://linkedin.com/in/miguel-mallqui",
+      "username": "miguel-mallqui"
+    }
+  ],
+  "techStack": [
+    { "id": "python", "name": "Python" },
+    { "id": "postgresql", "name": "PostgreSQL" },
+    { "id": "fastapi", "name": "FastAPI" },
+    { "id": "postgresql", "name": "PostgreSQL" },
+    { "id": "fastapi", "name": "FastAPI" }
+  ],
+  "seo": {
+    "title": "Miguel Mallqui - Portafolio",
+    "description": "Portafolio personal — Automatización de procesos y Ingeniería de Datos"
+  }
+}

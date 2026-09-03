@@ -1,48 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { motion } from "framer-motion";
-import {
-  GithubIcon,
-  LinkedinIcon,
-  Mail,
-  MapPin,
-  Clock,
-  Sun,
-} from "@/components/icons";
+import { Clock, Sun, MapPin } from "@/components/icons";
+import { GithubIcon, LinkedinIcon } from "@/components/icons";
 import TechIcon from "@/components/TechIcon";
+import profileData from "@/data/profile.json";
 
-const roles = [
-  "Automatización de Procesos",
-  "Backend",
-  "Soluciones con IA",
-];
+// ─── Typing effect ────────────────────────────────────────────────────────────
 
-const techStack = [
-  { id: "python", name: "Python" },
-  { id: "postgresql", name: "PostgreSQL" },
-  { id: "fastapi", name: "FastAPI" },
-  { id: "python", name: "Python" },
-  { id: "postgresql", name: "PostgreSQL" },
-  { id: "fastapi", name: "FastAPI" },
-];
-
-const doubledTechStack = [...techStack, ...techStack];
-
-const socialLinks = [
-  {
-    icon: GithubIcon,
-    href: "https://github.com/yassppy",
-    label: "GitHub",
-  },
-  {
-    icon: LinkedinIcon,
-    href: "https://linkedin.com/in/miguel-mallqui",
-    label: "LinkedIn",
-  },
-];
-
-function TypingText() {
+const TypingText = memo(function TypingText() {
+  const roles = profileData.roles;
   const [roleIndex, setRoleIndex] = useState(0);
   const [displayed, setDisplayed] = useState("");
   const [deleting, setDeleting] = useState(false);
@@ -64,7 +32,7 @@ function TypingText() {
           }
         }, 80);
     return () => clearTimeout(timeout);
-  }, [displayed, deleting, roleIndex]);
+  }, [displayed, deleting, roleIndex, roles]);
 
   return (
     <span className="text-zinc-600 dark:text-zinc-400 font-mono text-base sm:text-lg">
@@ -72,36 +40,62 @@ function TypingText() {
       <span className="animate-pulse text-indigo-500 dark:text-indigo-400">|</span>
     </span>
   );
-}
+});
 
-function LiveClock() {
-  const [time, setTime] = useState<string>("");
+// ─── Reloj en vivo — solo cliente para evitar hydration mismatch ─────────────
+
+const LiveClock = memo(function LiveClock() {
+  const [time, setTime] = useState<string | null>(null);
 
   useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
+    // Primera actualización en el cliente, evita mismatch con el servidor
+    setTime(
+      new Date().toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+      })
+    );
+
+    const interval = setInterval(() => {
       setTime(
-        now.toLocaleTimeString("en-US", {
+        new Date().toLocaleTimeString("en-US", {
           hour: "2-digit",
           minute: "2-digit",
           second: "2-digit",
           hour12: true,
         })
       );
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
+    }, 1000);
     return () => clearInterval(interval);
   }, []);
 
   return (
     <span className="font-mono text-sm font-bold tracking-wider text-zinc-800 dark:text-zinc-200">
-      {time || "10:04:54 AM"}
+      {/* null en SSR → sin texto, se llena en cliente sin mismatch */}
+      {time ?? "\u00A0"}
     </span>
   );
-}
+});
+
+// ─── Mapa de íconos sociales ──────────────────────────────────────────────────
+
+const SOCIAL_ICONS: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+  github: GithubIcon,
+  linkedin: LinkedinIcon,
+};
+
+// ─── Carrusel infinito — duplicado para bucle continuo ────────────────────────
+// Se calcula una sola vez fuera del componente (no recalcula en cada render)
+
+const doubledTechStack = [...profileData.techStack, ...profileData.techStack];
+
+// ─── Main section ─────────────────────────────────────────────────────────────
 
 export default function HeroSection() {
+  const { name, initials, bio, location, weather, social } = profileData;
+
   return (
     <section
       id="hero"
@@ -120,12 +114,14 @@ export default function HeroSection() {
             className="md:col-span-2 bento-card p-6 flex flex-col sm:flex-row items-center sm:items-start gap-5"
           >
             <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden bg-zinc-200 dark:bg-[#28282c] flex-shrink-0 border border-zinc-300 dark:border-[#3e3e42] flex items-center justify-center">
-              <span className="text-zinc-700 dark:text-zinc-300 text-3xl font-bold">MM</span>
+              <span className="text-zinc-700 dark:text-zinc-300 text-3xl font-bold">
+                {initials}
+              </span>
             </div>
 
             <div className="flex flex-col text-center sm:text-left justify-center h-full pt-1">
               <h1 className="text-3xl sm:text-4xl font-bold font-serif tracking-tight text-zinc-900 dark:text-zinc-100">
-                Miguel Mallqui
+                {name}
               </h1>
               <div className="mt-1">
                 <TypingText />
@@ -147,12 +143,12 @@ export default function HeroSection() {
 
             <div className="flex items-center gap-2.5 text-xs text-zinc-600 dark:text-zinc-400 font-mono">
               <Sun size={15} className="text-amber-500 dark:text-amber-400" />
-              <span>24°C</span>
+              <span>{weather.temp}</span>
             </div>
 
             <div className="flex items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400 font-mono tracking-wider">
               <MapPin size={14} className="text-zinc-500" />
-              <span className="uppercase">LIMA, PE</span>
+              <span className="uppercase">{location.label}</span>
             </div>
           </motion.div>
         </div>
@@ -168,10 +164,7 @@ export default function HeroSection() {
             className="md:col-span-2 bento-card p-6 sm:p-7 flex items-center"
           >
             <p className="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base leading-relaxed">
-              Especialista en automatización de procesos y desarrollo full stack.
-              Construyo soluciones que eliminan el trabajo repetitivo, integran
-              sistemas y escalan sin esfuerzo. Apasionado por la eficiencia medible
-              y la inteligencia artificial.
+              {bio}
             </p>
           </motion.div>
 
@@ -183,20 +176,24 @@ export default function HeroSection() {
             className="bento-card p-6 flex items-center justify-center"
           >
             <div className="flex items-center gap-3">
-              {socialLinks.map(({ icon: Icon, href, label }) => (
-                <motion.a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  whileHover={{ scale: 1.08 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-12 h-12 rounded-full bg-zinc-900 dark:bg-white text-zinc-100 dark:text-zinc-950 flex items-center justify-center hover:bg-zinc-700 dark:hover:bg-zinc-200 transition-colors shadow-md fill-current"
-                >
-                  <Icon size={20} className="w-5 h-5 fill-current text-current" />
-                </motion.a>
-              ))}
+              {social.map(({ platform, label, url }) => {
+                const Icon = SOCIAL_ICONS[platform];
+                if (!Icon) return null;
+                return (
+                  <motion.a
+                    key={platform}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    whileHover={{ scale: 1.08 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-12 h-12 rounded-full bg-zinc-900 dark:bg-white text-zinc-100 dark:text-zinc-950 flex items-center justify-center hover:bg-zinc-700 dark:hover:bg-zinc-200 transition-colors shadow-md fill-current"
+                  >
+                    <Icon size={20} className="w-5 h-5 fill-current text-current" />
+                  </motion.a>
+                );
+              })}
             </div>
           </motion.div>
         </div>
