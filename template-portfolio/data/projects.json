@@ -9,16 +9,9 @@
     "github": "https://github.com/yassppy/nubecont-automatizacion/",
     "demo": null,
     "image": "/projects/01/parte01.png",
-    "images": [
-      "/projects/01/parte01.png",
-      "/projects/01/parte02.png"
-    ],
+    "images": ["/projects/01/parte01.png", "/projects/01/parte02.png"],
     "featured": true,
-    "techs": [
-      "python",
-      "power-automate",
-      "go"
-    ]
+    "techs": ["python", "power-automate", "go"]
   },
   {
     "id": 2,
@@ -36,10 +29,7 @@
       "/projects/02/parte03.png"
     ],
     "featured": false,
-    "techs": [
-      "python",
-      "databricks"
-    ]
+    "techs": ["python", "databricks"]
   },
   {
     "id": 3,
@@ -51,16 +41,22 @@
     "github": "https://github.com/yassppy/agent_verdefit_pedidos",
     "demo": null,
     "image": "/projects/03/parte01.png",
-    "images": [
-      "/projects/03/parte01.png",
-      "/projects/03/parte02.png"
-    ],
+    "images": ["/projects/03/parte01.png", "/projects/03/parte02.png"],
     "featured": false,
-    "techs": [
-      "python",
-      "Google ADK",
-      "PostgreSQL",
-      "FastAPI"
-    ]
+    "techs": ["python", "Google ADK", "PostgreSQL", "FastAPI"]
+  },
+  {
+    "id": 4,
+    "title": "Dashboard de ventas Freshmart",
+    "startDate": "2026",
+    "endDate": "2026",
+    "description": "Se identifico una baja venta en agosto y noviembre. Se recomendo invertir en campaña de marketing y estrategias de reposición de productos.",
+    "category": "Análisis de datos",
+    "github": "https://datastudio.google.com/reporting/d9791d23-1b36-4527-b539-e9ff0c708491",
+    "demo": null,
+    "image": "",
+    "images": [],
+    "featured": false,
+    "techs": ["datastudio"]
   }
 ]
