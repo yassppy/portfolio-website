@@ -2,10 +2,7 @@
   "name": "Miguel Mallqui",
   "initials": "MM",
   "username": "yassppy",
-  "roles": [
-    "Automatización de Procesos",
-    "Ingeniería de Datos"
-  ],
+  "roles": ["Automatización de Procesos", "Ingeniería de Datos"],
   "bio": "Especialista en Automatización de Procesos y Datos. Integro IA y arquitecturas escalables no para reemplazar al equipo, sino para liberarlo de tareas manuales y potenciar su rendimiento.",
   "location": {
     "city": "Lima",
@@ -27,8 +24,8 @@
     {
       "platform": "linkedin",
       "label": "LinkedIn",
-      "url": "https://linkedin.com/in/miguel-mallqui",
-      "username": "miguel-mallqui"
+      "url": "https://www.linkedin.com/in/miguemallqui/",
+      "username": "miguemallqui"
     }
   ],
   "techStack": [
@@ -40,6 +37,6 @@
   ],
   "seo": {
     "title": "Miguel Mallqui - Portafolio",
-    "description": "Portafolio personal — Automatización de procesos y Ingeniería de Datos"
+    "description": "Portafolio personal — Automatización de procesos e Ingeniería de Datos"
   }
 }
