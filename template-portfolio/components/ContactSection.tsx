@@ -106,7 +106,7 @@ export default function ContactSection() {
         : "border-zinc-200 dark:border-zinc-700 focus:ring-indigo-500/30 focus:border-indigo-400"
     }`;
 
-  const { social, location, available, availableText } = profileData;
+  const { social, location } = profileData;
 
   // Construir lista de items de contacto desde profile.json
   const contactItems = [
@@ -197,19 +197,7 @@ export default function ContactSection() {
               );
             })}
 
-            {available && (
-              <div className="p-4 bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800 rounded-xl">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                  <span className="text-sm font-medium text-green-700 dark:text-green-400">
-                    Disponible para proyectos
-                  </span>
-                </div>
-                <p className="text-xs text-green-600 dark:text-green-500">
-                  {availableText}
-                </p>
-              </div>
-            )}
+            {/* available badge removed */}
           </motion.div>
 
           {/* Right — Form */}

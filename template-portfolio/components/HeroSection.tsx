@@ -2,7 +2,7 @@
 
 import { useEffect, useState, memo } from "react";
 import { motion } from "framer-motion";
-import { Clock, Sun, MapPin } from "@/components/icons";
+import Image from "next/image";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
 import TechIcon from "@/components/TechIcon";
 import profileData from "@/data/profile.json";
@@ -42,43 +42,6 @@ const TypingText = memo(function TypingText() {
   );
 });
 
-// ─── Reloj en vivo — solo cliente para evitar hydration mismatch ─────────────
-
-const LiveClock = memo(function LiveClock() {
-  const [time, setTime] = useState<string | null>(null);
-
-  useEffect(() => {
-    // Primera actualización en el cliente, evita mismatch con el servidor
-    setTime(
-      new Date().toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: true,
-      })
-    );
-
-    const interval = setInterval(() => {
-      setTime(
-        new Date().toLocaleTimeString("en-US", {
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: true,
-        })
-      );
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <span className="font-mono text-sm font-bold tracking-wider text-zinc-800 dark:text-zinc-200">
-      {/* null en SSR → sin texto, se llena en cliente sin mismatch */}
-      {time ?? "\u00A0"}
-    </span>
-  );
-});
-
 // ─── Mapa de íconos sociales ──────────────────────────────────────────────────
 
 const SOCIAL_ICONS: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
@@ -94,7 +57,7 @@ const doubledTechStack = [...profileData.techStack, ...profileData.techStack];
 // ─── Main section ─────────────────────────────────────────────────────────────
 
 export default function HeroSection() {
-  const { name, initials, bio, location, weather, social } = profileData;
+  const { name, initials, bio, social } = profileData;
 
   return (
     <section
@@ -111,7 +74,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="md:col-span-2 bento-card p-6 flex flex-col sm:flex-row items-center sm:items-start gap-5"
+            className="md:col-span-2 bento-card p-6 flex flex-col sm:flex-row items-center gap-5"
           >
             <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden bg-zinc-200 dark:bg-[#28282c] flex-shrink-0 border border-zinc-300 dark:border-[#3e3e42] flex items-center justify-center">
               <span className="text-zinc-700 dark:text-zinc-300 text-3xl font-bold">
@@ -119,37 +82,44 @@ export default function HeroSection() {
               </span>
             </div>
 
-            <div className="flex flex-col text-center sm:text-left justify-center h-full pt-1">
+            <div className="flex flex-col text-center sm:text-left justify-center h-full">
               <h1 className="text-3xl sm:text-4xl font-bold font-serif tracking-tight text-zinc-900 dark:text-zinc-100">
                 {name}
               </h1>
               <div className="mt-1">
                 <TypingText />
               </div>
+              {/* Badge disponible */}
+              <div className="mt-3 flex justify-center sm:justify-start">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-emerald-500/40 bg-emerald-500/10 text-emerald-500 dark:text-emerald-400 text-[11px] font-mono tracking-wide">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                  </span>
+                  disponible para nuevos proyectos
+                </span>
+              </div>
             </div>
           </motion.div>
 
-          {/* Time & Location Widget Card */}
+          {/* AI Flow GIF Card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="bento-card p-6 flex flex-col justify-between gap-3 text-zinc-700 dark:text-zinc-300"
+            className="bento-card overflow-hidden flex items-center justify-center"
+            style={{ minHeight: "160px" }}
           >
-            <div className="flex items-center gap-2.5">
-              <Clock size={16} className="text-zinc-500 dark:text-zinc-400" />
-              <LiveClock />
-            </div>
-
-            <div className="flex items-center gap-2.5 text-xs text-zinc-600 dark:text-zinc-400 font-mono">
-              <Sun size={15} className="text-amber-500 dark:text-amber-400" />
-              <span>{weather.temp}</span>
-            </div>
-
-            <div className="flex items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400 font-mono tracking-wider">
-              <MapPin size={14} className="text-zinc-500" />
-              <span className="uppercase">{location.label}</span>
-            </div>
+            <Image
+              src="/clawd-typing.gif"
+              alt="AI SDD flow"
+              width={200}
+              height={160}
+              className="w-full h-full object-cover"
+              unoptimized
+              loading="eager"
+              priority
+            />
           </motion.div>
         </div>
 

@@ -75,11 +75,20 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-14">
             {/* Logo */}
             <motion.span
-              className="font-mono text-lg font-bold tracking-tight text-indigo-500 dark:text-indigo-400 cursor-pointer"
+              className="flex items-center gap-1.5 cursor-pointer"
               onClick={() => scrollTo("#hero")}
               whileHover={{ scale: 1.05 }}
             >
-              &lt;{profileData.username} /&gt;
+              <img
+                src="/bloub-cercle-attentif-bleu-anime.svg"
+                alt="yassppy logo"
+                width={28}
+                height={28}
+                className="w-7 h-7 shrink-0"
+              />
+              <span className="font-mono text-lg font-bold tracking-tight text-indigo-500 dark:text-indigo-400 leading-none">
+                &lt;{profileData.username} /&gt;
+              </span>
             </motion.span>
 
             {/* Desktop Links */}
