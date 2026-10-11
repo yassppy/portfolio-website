@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
 
     // Calidades permitidas (el componente GalleryImage usa 80 en index=0, rest lazy)
-    qualities: [75, 80],
+    qualities: [75, 80, 85],
 
     // Tamaños de dispositivo para srcset responsivo
     deviceSizes: [640, 750, 828, 1080, 1200],
