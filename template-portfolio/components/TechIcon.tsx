@@ -48,6 +48,7 @@ import cloudflare from "thesvg/cloudflare";
 import railway from "thesvg/railway";
 import databricks from "thesvg/databricks";
 import go from "thesvg/go";
+import laravel from "thesvg/laravel";
 
 // Mapa de los objetos de los iconos
 const ICON_MAP: Record<string, SvgIconData> = {
@@ -87,6 +88,7 @@ const ICON_MAP: Record<string, SvgIconData> = {
   railway,
   databricks,
   go,
+  laravel,
 };
 
 // Human-readable labels
