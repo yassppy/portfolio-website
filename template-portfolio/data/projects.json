@@ -58,5 +58,19 @@
     "images": [],
     "featured": false,
     "techs": ["datastudio"]
+  },
+  {
+    "id": 5,
+    "title": "Ecommerce laravel ApiRest",
+    "startDate": "2026",
+    "endDate": "2026",
+    "description": "API REST para una tienda en línea con Laravel 13 y PostgreSQL. Incluye gestión de catálogo, carrito y órdenes de compra e integración de pagos con PayPal.",
+    "category": "backend",
+    "github": "https://github.com/yassppy/backend_ecommerce",
+    "demo": null,
+    "image": "/projects/04/parte01.png",
+    "images": ["/projects/04/parte01.png", "/projects/04/parte02.png"],
+    "featured": false,
+    "techs": ["laravel"]
   }
 ]
